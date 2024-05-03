@@ -80,9 +80,32 @@ module Character
         |      |
         |   ┌(x_x)┘
         |      |
-        |     / \
+        |     / \\
 
     Incorrect Guesses: 6/6
     )
   end
+
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/CyclomaticComplexity
+  def draw_character(wrong_guesses)
+    case wrong_guesses
+    when 0
+      no_wrong_guesses
+    when 1
+      one_wrong_guess
+    when 2
+      two_wrong_guesses
+    when 3
+      three_wrong_guesses
+    when 4
+      four_wrong_guesses
+    when 5
+      five_wrong_guesses
+    when 6
+      dead_character
+    end
+  end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/CyclomaticComplexity
 end
