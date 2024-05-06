@@ -25,9 +25,23 @@ class Game
     @display_word = generate_display(@secret_word)
     @incorrect_guesses = 0
     @already_guessed = []
+
+    game_loop
   end
 
   private
+
+  def game_loop
+    until @incorrect_guesses == 6
+      puts draw_character(@incorrect_guesses, @display_word)
+      guess = guess_letter
+      if check_guess(@secret_word, guess) == false
+        not_correct_result(guess)
+        next
+      end
+      @display_word = fill_display_gaps(@display_word, @secret_word, guess)
+    end
+  end
 
   def guess_letter(start_text: true)
     puts 'Please input your next guess.' if start_text
@@ -41,4 +55,12 @@ class Game
     end
     guess
   end
+
+  def not_correct_result(guess)
+    puts 'Argh! That letter is not present in the word. That poor hanging man...'
+    already_guessed << guess
+    @incorrect_guesses += 1
+  end
 end
+
+Game.new.play
