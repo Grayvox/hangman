@@ -15,7 +15,14 @@ module GameLogic
     display.join(' ')
   end
 
-  def compare_guess(display, secret, guess)
+  def check_guess(secret, guess)
+    return false unless secret.include?(guess)
+
+    puts 'Correct! You guessed successfully.'
+    true
+  end
+
+  def fill_display_gaps(display, secret, guess)
     display_arr = display.split(' ')
     secret_arr = secret.split('')
 
