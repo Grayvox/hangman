@@ -9,6 +9,12 @@ module GameLogic
     end
   end
 
+  def generate_display(secret)
+    display = []
+    secret.split('').each { |_| display << '_' }
+    display.join(' ')
+  end
+
   def compare_guess(display, secret, guess)
     display_arr = display.split(' ')
     secret_arr = secret.split('')
