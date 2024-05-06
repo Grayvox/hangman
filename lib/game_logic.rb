@@ -3,6 +3,6 @@
 # Contains the main logic methods for the game
 module GameLogic
   def pick_random_word
-    File.readlines('./words.text').sample
+    File.readlines('./words.txt').sample
   end
 end
