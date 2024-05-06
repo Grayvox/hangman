@@ -42,9 +42,3 @@ module Text
   end
   # rubocop:enable Metrics/MethodLength
 end
-
-class Yes
-  include Text
-end
-
-puts Yes.new.intro_text
