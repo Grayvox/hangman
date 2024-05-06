@@ -41,4 +41,14 @@ module Text
     )
   end
   # rubocop:enable Metrics/MethodLength
+
+  def win_text(player)
+    %(
+
+    \s\s\s\s\s\s\s\s\sYOU WON
+    \u001b[37;1;1m--------------------------\u001b[0m\n
+    #{player} has won the game! Congratulations!
+
+    )
+  end
 end
