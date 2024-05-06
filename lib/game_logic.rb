@@ -25,4 +25,8 @@ module GameLogic
     puts 'Correct! You guessed successfully.'
     display_arr.join(' ')
   end
+
+  def self.check_for_win(display, secret)
+    display.gsub(/\s+/, '') == secret
+  end
 end
