@@ -26,7 +26,7 @@ module GameLogic
     display_arr.join(' ')
   end
 
-  def self.check_for_win(display, secret)
+  def check_for_win(display, secret)
     display.gsub(/\s+/, '') == secret
   end
 end
