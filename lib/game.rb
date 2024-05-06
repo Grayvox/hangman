@@ -4,5 +4,5 @@
 class Game
   private
 
-  attr_accessor :incorrect_guesses, :already_guessed, :secret_word, :display_word
+  attr_accessor :player_name, :secret_word, :display_word, :incorrect_guesses, :already_guessed
 end
