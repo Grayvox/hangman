@@ -20,19 +20,27 @@ class Game
 
   def play(intro: true)
     puts intro_text if intro
-    puts 'First, enter your name.'
-    @player_name = gets.chomp
-    puts 'Great! The game can now start.'
-
-    @secret_word = pick_random_word
-    @display_word = generate_display(@secret_word)
-    @incorrect_guesses = 0
-    @already_guessed = []
-
-    game_loop
+    puts 'Welcome to Hangman!'
+    starting_prompt
   end
 
   private
+
+  # rubocop:disable Metrics/MethodLength
+  def starting_prompt
+    puts "Do you wish to start a new game or load an old game? Respond with either 'new' or 'load'."
+    answer = gets.chomp.downcase
+    case answer
+    when 'new', 'n'
+      new_game
+    when 'load', 'l'
+      load_game
+    else
+      puts "Please answer with either 'new' or 'load'. Or, if you like, shorten one of those to the first letter."
+      starting_prompt
+    end
+  end
+  # rubocop:enable Metrics/MethodLength
 
   def replay
     puts 'Would you like to play again? Respond with either Y or N.'
@@ -64,6 +72,25 @@ class Game
     player_loses
   end
   # rubocop:enable Metrics/MethodLength
+
+  def new_game
+    puts 'Starting new game...'
+    puts 'First, enter your name.'
+    @player_name = gets.chomp
+    puts 'Great! The game can now start.'
+
+    @secret_word = pick_random_word
+    @display_word = generate_display(@secret_word)
+    @incorrect_guesses = 0
+    @already_guessed = []
+
+    game_loop
+  end
+
+  def load_game
+    puts 'Loading previously saved games...'
+    # To be made later
+  end
 
   def save_game(file_name)
     current_game_data = {

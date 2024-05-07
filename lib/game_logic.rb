@@ -5,7 +5,7 @@ module GameLogic
   def pick_random_word
     words = File.readlines('./words.txt').shuffle
     words.each do |line|
-      return line if line.length < 12 && line.length > 5
+      return line.gsub(/\s+/, '') if line.length < 12 && line.length > 5
     end
   end
 
@@ -15,6 +15,7 @@ module GameLogic
     display.join(' ')
   end
 
+  # rubocop:disable Metrics/MethodLength
   def guess_letter(start_text: true)
     puts 'Please input your next guess.' if start_text
     guess = gets.chomp.downcase
@@ -27,8 +28,10 @@ module GameLogic
       puts 'That letter has already been guessed. Please try again.'
       return guess_letter(start_text: false)
     end
+
     guess
   end
+  # rubocop:enable Metrics/MethodLength
 
   def check_guess(secret, guess)
     false unless secret.include?(guess)
