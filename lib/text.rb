@@ -51,4 +51,14 @@ module Text
 
     )
   end
+
+  def lose_text(player)
+    %(
+
+    \s\s\s\s\s\s\s\s\sYOU LOST
+    \u001b[37;1;1m--------------------------\u001b[0m\n
+    #{player} has lost the game :[
+
+    )
+  end
 end

@@ -45,6 +45,8 @@ class Game
       already_guessed << guess
       @display_word = fill_display_gaps(@display_word, @secret_word, guess)
     end
+    puts draw_character(@incorrect_guesses, @secret_word)
+    puts lose_text(@player_name)
   end
   # rubocop:enable Metrics/MethodLength
 

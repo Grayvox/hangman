@@ -96,7 +96,7 @@ module Character
 
     Incorrect Guesses: 6/6
 
-      #{display}
+    Answer: #{display}
     )
   end
 
