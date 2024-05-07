@@ -16,7 +16,8 @@ class Game
 
   public
 
-  def play
+  def play(intro: true)
+    puts intro_text if intro
     puts 'First, enter your name.'
     @player_name = gets.chomp
     puts 'Great! The game can now start.'
