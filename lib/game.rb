@@ -31,11 +31,22 @@ class Game
 
   private
 
+  def replay
+    puts 'Would you like to play again? Respond with either Y or N.'
+    answer = gets.chomp.downcase
+    if answer == 'y'
+      puts 'Restarting game...'
+      play
+    else
+      puts 'Thanks for playing! Goodbye!'
+    end
+  end
+
   # rubocop:disable Metrics/MethodLength
   def game_loop
     until @incorrect_guesses == 6
       puts draw_character(@incorrect_guesses, @display_word)
-      return puts win_text(@player_name) if win_check(@display_word, @secret_word)
+      return player_wins if win_check(@display_word, @secret_word)
 
       guess = guess_letter
       if check_guess(@secret_word, guess) == false
@@ -45,8 +56,7 @@ class Game
       already_guessed << guess
       @display_word = fill_display_gaps(@display_word, @secret_word, guess)
     end
-    puts draw_character(@incorrect_guesses, @secret_word)
-    puts lose_text(@player_name)
+    player_loses
   end
   # rubocop:enable Metrics/MethodLength
 
@@ -67,6 +77,17 @@ class Game
     puts 'Argh! That letter is not present in the word. That poor hanging man...'
     already_guessed << guess
     @incorrect_guesses += 1
+  end
+
+  def player_wins
+    puts win_text(@player_name)
+    replay
+  end
+
+  def player_loses
+    puts draw_character(@incorrect_guesses, @secret_word)
+    puts lose_text(@player_name)
+    replay
   end
 end
 
