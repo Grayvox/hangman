@@ -91,5 +91,3 @@ class Game
     replay
   end
 end
-
-Game.new.play
