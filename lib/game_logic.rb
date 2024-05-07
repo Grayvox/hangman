@@ -16,10 +16,7 @@ module GameLogic
   end
 
   def check_guess(secret, guess)
-    return false unless secret.include?(guess)
-
-    puts 'Correct! You guessed successfully.'
-    true
+    false unless secret.include?(guess)
   end
 
   def fill_display_gaps(display, secret, guess)
