@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 require_relative 'game_logic'
 require_relative 'text'
 require_relative 'character'
@@ -50,6 +52,8 @@ class Game
       return player_wins if win_check(@display_word, @secret_word)
 
       guess = guess_letter
+      return save_prompts if guess == 'save'
+
       if check_guess(@secret_word, guess) == false
         not_correct_result(guess)
         next
@@ -60,4 +64,28 @@ class Game
     player_loses
   end
   # rubocop:enable Metrics/MethodLength
+
+  def save_game(file_name)
+    current_game_data = {
+      'player_saved': @player_name,
+      'already_guessed_saved': @already_guessed,
+      'incorrect_guesses_saved': @incorrect_guesses,
+      'secret_saved': @secret_word,
+      'display_saved': @display_word
+    }
+
+    File.write("./saved/#{file_name}.json", JSON.pretty_generate(current_game_data))
+  end
+
+  def save_prompts
+    puts 'Please enter what you want to name this game (This is case insensitive).'
+    file_name = gets.chomp.downcase
+    if file_name.empty?
+      puts 'Sorry! Your game file has to have at least one character in the name. Try again.'
+      return save_prompts
+    end
+    puts 'Saving game...'
+    save_game(file_name)
+    puts 'Game successfully saved! Goodbye!'
+  end
 end

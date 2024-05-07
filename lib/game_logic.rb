@@ -18,7 +18,9 @@ module GameLogic
   def guess_letter(start_text: true)
     puts 'Please input your next guess.' if start_text
     guess = gets.chomp.downcase
-    if guess.length != 1
+    if guess == 'save'
+      return guess
+    elsif guess.length != 1
       puts 'Hey! Guesses must be only ONE letter. Please try again.'
       return guess_letter(start_text: false)
     elsif @already_guessed.include?(guess)
