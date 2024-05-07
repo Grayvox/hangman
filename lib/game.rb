@@ -34,7 +34,7 @@ class Game
   def game_loop
     until @incorrect_guesses == 6
       puts draw_character(@incorrect_guesses, @display_word)
-      return player_won if win_check(@display_word, @secret_word)
+      return puts win_text(@player_name) if win_check(@display_word, @secret_word)
 
       guess = guess_letter
       if check_guess(@secret_word, guess) == false
@@ -63,10 +63,6 @@ class Game
     puts 'Argh! That letter is not present in the word. That poor hanging man...'
     already_guessed << guess
     @incorrect_guesses += 1
-  end
-
-  def player_won
-    puts win_text(@player_name)
   end
 end
 
