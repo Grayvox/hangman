@@ -31,6 +31,7 @@ class Game
 
   private
 
+  # rubocop:disable Metrics/MethodLength
   def game_loop
     until @incorrect_guesses == 6
       puts draw_character(@incorrect_guesses, @display_word)
@@ -45,6 +46,7 @@ class Game
       @display_word = fill_display_gaps(@display_word, @secret_word, guess)
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def guess_letter(start_text: true)
     puts 'Please input your next guess.' if start_text
