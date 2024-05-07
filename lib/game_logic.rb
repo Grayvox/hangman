@@ -15,6 +15,19 @@ module GameLogic
     display.join(' ')
   end
 
+  def guess_letter(start_text: true)
+    puts 'Please input your next guess.' if start_text
+    guess = gets.chomp.downcase
+    if guess.length != 1
+      puts 'Hey! Guesses must be only ONE letter. Please try again.'
+      return guess_letter(start_text: false)
+    elsif @already_guessed.include?(guess)
+      puts 'That letter has already been guessed. Please try again.'
+      return guess_letter(start_text: false)
+    end
+    guess
+  end
+
   def check_guess(secret, guess)
     false unless secret.include?(guess)
   end
@@ -28,6 +41,23 @@ module GameLogic
     end
     puts 'Correct! You guessed successfully.'
     display_arr.join(' ')
+  end
+
+  def not_correct_result(guess)
+    puts 'Argh! That letter is not present in the word. That poor hanging man...'
+    already_guessed << guess
+    @incorrect_guesses += 1
+  end
+
+  def player_wins
+    puts win_text(@player_name)
+    replay
+  end
+
+  def player_loses
+    puts draw_character(@incorrect_guesses, @secret_word)
+    puts lose_text(@player_name)
+    replay
   end
 
   def win_check(display, secret)
