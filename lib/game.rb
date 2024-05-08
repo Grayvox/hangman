@@ -42,37 +42,6 @@ class Game
   end
   # rubocop:enable Metrics/MethodLength
 
-  def replay
-    puts 'Would you like to play again? Respond with either Y or N.'
-    answer = gets.chomp.downcase
-    if answer == 'y'
-      puts 'Restarting game...'
-      play
-    else
-      puts 'Thanks for playing! Goodbye!'
-    end
-  end
-
-  # rubocop:disable Metrics/MethodLength
-  def game_loop
-    until @incorrect_guesses == 6
-      puts draw_character(@incorrect_guesses, @display_word)
-      return player_wins if win_check(@display_word, @secret_word)
-
-      guess = guess_letter
-      return save_prompts if guess == 'save'
-
-      if check_guess(@secret_word, guess) == false
-        not_correct_result(guess)
-        next
-      end
-      already_guessed << guess
-      @display_word = fill_display_gaps(@display_word, @secret_word, guess)
-    end
-    player_loses
-  end
-  # rubocop:enable Metrics/MethodLength
-
   def new_game
     puts 'Starting new game...'
     puts 'First, enter your name.'
@@ -115,4 +84,35 @@ class Game
     save_game(file_name)
     puts 'Game successfully saved! Goodbye!'
   end
+
+  def replay
+    puts 'Would you like to play again? Respond with either Y or N.'
+    answer = gets.chomp.downcase
+    if answer == 'y'
+      puts 'Restarting game...'
+      play
+    else
+      puts 'Thanks for playing! Goodbye!'
+    end
+  end
+
+  # rubocop:disable Metrics/MethodLength
+  def game_loop
+    until @incorrect_guesses == 6
+      puts draw_character(@incorrect_guesses, @display_word)
+      return player_wins if win_check(@display_word, @secret_word)
+
+      guess = guess_letter
+      return save_prompts if guess == 'save'
+
+      if check_guess(@secret_word, guess) == false
+        not_correct_result(guess)
+        next
+      end
+      already_guessed << guess
+      @display_word = fill_display_gaps(@display_word, @secret_word, guess)
+    end
+    player_loses
+  end
+  # rubocop:enable Metrics/MethodLength
 end
