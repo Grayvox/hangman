@@ -28,11 +28,11 @@ module Text
     player manages to guess incorrectly 6 times, the man will be fully drawn and dead, thereby ending the
     game in a loss.
 
-    At any time during the game, the player has the option to save and quit the game that is currently in
-    progress for them to play later. Saving the game will generate a JSON file, containing the player name,
-    the letters already guessed, the amount of incorrect guesses made, the secret word, and the "display
-    version" of the secret word (containing all the correct letters made and underscores in place of the
-    letters not yet guessed).
+    At any time during the game, the player has the option to save and quit the game (by typing 'save'
+    instead of a guess) that is currently in progress for them to play later. Saving the game will generate
+    a JSON file, containing the player name, the letters already guessed, the amount of incorrect guesses
+    made, the secret word, and the "display version" of the secret word (containing all the correct letters
+    made and underscores in place of the letters not yet guessed).
 
     Have fun!
     -Grayvox

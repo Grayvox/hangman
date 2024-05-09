@@ -3,12 +3,14 @@
 require 'json'
 
 require_relative 'game_logic'
+require_relative 'game_data'
 require_relative 'text'
 require_relative 'character'
 
 # Defines the game itself
 class Game
   include GameLogic
+  include GameData
   include Text
   include Character
 
@@ -33,57 +35,16 @@ class Game
     case answer
     when 'new', 'n'
       new_game
+      game_loop
     when 'load', 'l'
-      load_game
+      load_prompts
+      game_loop
     else
       puts "Please answer with either 'new' or 'load'. Or, if you like, shorten one of those to the first letter."
       starting_prompt
     end
   end
   # rubocop:enable Metrics/MethodLength
-
-  def new_game
-    puts 'Starting new game...'
-    puts 'First, enter your name.'
-    @player_name = gets.chomp
-    puts 'Great! The game can now start.'
-
-    @secret_word = pick_random_word
-    @display_word = generate_display(@secret_word)
-    @incorrect_guesses = 0
-    @already_guessed = []
-
-    game_loop
-  end
-
-  def load_game
-    puts 'Loading previously saved games...'
-    # To be made later
-  end
-
-  def save_game(file_name)
-    current_game_data = {
-      'player_saved': @player_name,
-      'already_guessed_saved': @already_guessed,
-      'incorrect_guesses_saved': @incorrect_guesses,
-      'secret_saved': @secret_word,
-      'display_saved': @display_word
-    }
-
-    File.write("./saved/#{file_name}.json", JSON.pretty_generate(current_game_data))
-  end
-
-  def save_prompts
-    puts 'Please enter what you want to name this game (This is case insensitive).'
-    file_name = gets.chomp.downcase
-    if file_name.empty?
-      puts 'Sorry! Your game file has to have at least one character in the name. Try again.'
-      return save_prompts
-    end
-    puts 'Saving game...'
-    save_game(file_name)
-    puts 'Game successfully saved! Goodbye!'
-  end
 
   def replay
     puts 'Would you like to play again? Respond with either Y or N.'
