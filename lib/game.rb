@@ -57,7 +57,7 @@ class Game
     answer = gets.chomp.downcase
     if answer == 'y'
       puts 'Restarting game...'
-      play
+      play(false)
     else
       puts 'Thanks for playing! Goodbye!'
     end
