@@ -57,8 +57,8 @@ module GameData
     list = Dir.children('./saved').map! { |name| name.gsub('.json', '') }
     puts list
     puts @seperation_lines
-    puts 'Which game do you wish to continue playing?'
-    answer = gets.chomp.downcase
+    puts 'Which game do you wish to continue playing? (This is case sensitive)'
+    answer = gets.chomp
     unless list.include?(answer)
       puts 'There is no file with that name. Please try again.'
       return load_prompts

@@ -1,0 +1,13 @@
+{
+  "player_saved": "Pete",
+  "already_guessed_saved": [
+    "u",
+    "g",
+    "e",
+    "a",
+    "d"
+  ],
+  "incorrect_guesses_saved": 2,
+  "secret_saved": "deputy",
+  "display_saved": "d e _ u _ _"
+}

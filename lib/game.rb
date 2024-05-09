@@ -37,6 +37,12 @@ class Game
       new_game
       game_loop
     when 'load', 'l'
+      if Dir.empty?('./saved')
+        puts 'No saved files found. Starting a new game...'
+        new_game
+        game_loop
+      end
+
       load_prompts
       game_loop
     else
